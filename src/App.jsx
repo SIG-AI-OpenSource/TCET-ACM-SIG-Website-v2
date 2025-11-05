@@ -1,6 +1,8 @@
 import React from 'react';
 import useFetch from './hooks/useFetch';
 import BlogCard from './components/BlogCard';
+import Header from './Header';
+import Footer from './Footer';
 // Assuming you've moved the CSS to src/styles/style.css and imported it in main.jsx
 
 // The full URL for fetching the blogs
@@ -10,6 +12,7 @@ function App() {
   // Use the custom hook to fetch data
   const { data: blogs, loading, error } = useFetch(BLOGS_URL);
 
+  
   // Simple menu toggle logic
   const toggleMenu = () => {
     const nav = document.querySelector('.nav');
@@ -39,9 +42,52 @@ function App() {
     content = <h2 style={{ textAlign: 'center', color: '#ccc' }}>No blogs found.</h2>;
   }
 
+  const items = [
+    {
+      label: "Home",
+      bgImage: Home,
+      textColor: "#fff",
+      href: "/",
+    },
+    {
+      label: "Events", 
+      bgImage: Events,
+      textColor: "#fff",
+      href: "/Events",
+    },
+    {
+      label: "Publications",
+      bgImage: Publications,
+      textColor: "#fff",
+      href: "/Publications",
+    },
+    {
+      label: "Our Team",
+      bgImage: OurTeam,
+      textColor: "#fff",
+      href: "/Our-Team",
+    },
+    {
+      label: "Blog",
+      bgImage: Blog,
+      textColor: "#fff",
+      href: "/Blogs",
+    }
+  ];
   // --- Main Component Structure ---
   return (
     <>
+    <div className="relative h-screen w-screen">
+        <Header
+      logo={<Logo />}
+      logoAlt="Company Logo"
+      items={items}
+      baseColor="#fff"
+      menuColor="#000"
+      buttonBgColor="#111"
+      buttonTextColor="#fff"
+      ease="power3.out"
+    /> </div>
       <header>
         <nav>
           <div className="logo">OUR BLOGS</div>
@@ -64,7 +110,7 @@ function App() {
       <section className="blog-list">
         {content} {/* Dynamic content based on fetch state */}
       </section>
-
+      <Footer/>
       {/* Note: The original script.js is no longer needed since we handle toggleMenu in React */}
     </>
   );
